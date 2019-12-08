@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="19_NavKalamo" size="5.000000 6.856866" />
+    <ImageTarget name="24_LastPage" size="5.000000 6.856866" />
+    <ImageTarget name="23_Kavita" size="5.000000 6.856866" />
+    <ImageTarget name="18_Pujyashree_NavKalam" size="5.000000 6.856866" />
+    <ImageTarget name="17_Fan" size="5.000000 6.856866" />
+    <ImageTarget name="13_Podcast" size="5.000000 6.856866" />
+    <ImageTarget name="12_Dada" size="5.000000 6.856866" />
+    <ImageTarget name="11_Money" size="5.000000 6.856866" />
+    <ImageTarget name="10_Satyadat_Sheth" size="5.000000 6.856866" />
+    <ImageTarget name="09_Negative" size="5.000000 6.856866" />
+    <ImageTarget name="08_Positive" size="5.000000 6.856866" />
+    <ImageTarget name="07_Glasses" size="5.000000 6.856866" />
+    <ImageTarget name="05_Chicken" size="5.000000 6.856866" />
+    <ImageTarget name="04_Gnani_With_Youth" size="5.000000 6.856866" />
+    <ImageTarget name="03_Sampadkiya" size="5.000000 6.856866" />
+    <ImageTarget name="01_Front_Page" size="5.000000 6.856866" />
+  </Tracking>
+</QCARConfig>

@@ -16,10 +16,16 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("AkramYouthAR");
     }
 
+    public void GoToNovembereAR()
+    {
+        SceneManager.LoadScene("November");
+    }
+
 
     public void GoToVideo()
     {
-        SceneManager.LoadScene("Video");
+        //SceneManager.LoadScene("Video");
+        Application.OpenURL("https://youtu.be/hvSGjNGqQoQ");
     }
 
     public void GoToAbout()
@@ -30,5 +36,21 @@ public class ChangeScene : MonoBehaviour
     public void OpenYouthApp()
     {
         Application.OpenURL("market://details?id=org.dadabhagwan.youth");
+    }
+
+    public void OpenAkramYouthARApp()
+    {
+        Application.OpenURL("market://details?id=org.dadabhagwan.akramyouthar");
+    }
+
+    public void OpenAkramYouthMagazine()
+    {
+        Application.OpenURL("https://youth.dadabhagwan.org/gallery/akram-youth/");
+    }
+
+    public void ReloadScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
