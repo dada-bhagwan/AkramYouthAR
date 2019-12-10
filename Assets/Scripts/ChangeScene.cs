@@ -26,6 +26,11 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("MagazineList");
     }
 
+    public void GoToMagazineDownloadList()
+    {
+        SceneManager.LoadScene("MagDownloadList");
+    }
+
     public void GoToVideo()
     {
         //SceneManager.LoadScene("Video");

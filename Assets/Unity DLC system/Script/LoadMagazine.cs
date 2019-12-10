@@ -10,17 +10,12 @@ using System;
 
 public class LoadMagazine : MonoBehaviour
 {
-    [Header("UI DLC")]
-    public Transform rootDicContainer;
-    public DLC dlcPrefeb;
-
+    
     [Header("UI SCENE LIST")]
     public Transform rootContainer;
     public Button prefeb;
     public Text labelText;
     public GameObject Space;
-
-    Magazine[] magazineList;
 
     public static LoadMagazine main
     {
@@ -42,11 +37,12 @@ public class LoadMagazine : MonoBehaviour
     {
 
         main = this;
-        dlcPath = (Application.platform == RuntimePlatform.Android ? Application.persistentDataPath : Application.dataPath) + "/DLC/";
+        dlcPath = DLCCache.dlcFolder;
         Init();
     }
     IEnumerator LoadAssets()
     {
+        LoadMagazineList();
         if (!Directory.Exists(dlcPath))
         {
             Directory.CreateDirectory(dlcPath);
@@ -61,81 +57,90 @@ public class LoadMagazine : MonoBehaviour
         scensNames.Clear();
 
         string dlcFolder = dlcPath;
-        /*int i = 0;
-        while (i < magazineList.Length)
+        int i = 0;
+        List<Magazine> magazineList = DLCCache.magazinelist;
+        
+        while (i < magazineList.Count)
         {
-            string path = dlcPath + magazineList[i].fileName;
-            if (File.Exists(path))
+            try
             {
-                AssetBundle bundle = AssetBundle.LoadFromFile(path);
-                assetBundles.Add(bundle);
-                scensNames.AddRange(bundle.GetAllScenePaths());
+                string path = dlcPath + magazineList[i].fileName;
+                if (File.Exists(path))
+                {
+                    AssetBundle bundle = AssetBundle.LoadFromFile(path);
+                    assetBundles.Add(bundle);
+                    scensNames.AddRange(bundle.GetAllScenePaths());
 
-                *//*var bundleRequest = AssetBundle.LoadFromFileAsync(path);
-                yield return bundleRequest;
+                    /*var bundleRequest = AssetBundle.LoadFromFileAsync(path);
+                    /*yield return bundleRequest;
 
-                assetBundles.Add(bundleRequest.assetBundle);
+                    assetBundles.Add(bundleRequest.assetBundle);
 
-                scensNames.AddRange(bundleRequest.assetBundle.GetAllScenePaths());*//*
+                    scensNames.AddRange(bundleRequest.assetBundle.GetAllScenePaths());*/
+                }
+            } catch(Exception e)
+            {
+                Debug.LogError("Error while loading magazine" + magazineList[i] + e.StackTrace);
             }
+
             i++;
             yield return null;
         }
 
         ////DELETE UNused
-        string[] dlcFiles = Directory.GetFiles(dlcPath);
-        foreach (var item in dlcFiles)
-        {
-            if (Path.GetExtension(item) != ".meta")
-            {
-                bool used = false;
-                var filedata = magazineList.FirstOrDefault(x => x.url.EndsWith(item));
-                if (filedata != null)
-                {
-                    File.Delete(item);
-                }
-            }
-        }*/
-        if(Directory.Exists(dlcFolder))
+        try
         {
             string[] dlcFiles = Directory.GetFiles(dlcPath);
             foreach (var item in dlcFiles)
             {
-                /*if (Path.GetExtension(item) != ".meta")
+                if (Path.GetExtension(item) != ".meta")
+                {
+                    bool used = false;
+                    var filedata = magazineList.FirstOrDefault(x => x.url.EndsWith(item));
+                    if (filedata != null)
+                    {
+                        File.Delete(item);
+                    }
+                }
+            }
+        } catch(Exception e)
+        {
+            Debug.LogError("##### Error while deleting File" + e.StackTrace);
+        }
+
+        /*if(Directory.Exists(dlcFolder))
+        {
+            string[] dlcFiles = Directory.GetFiles(dlcPath);
+            foreach (var item in dlcFiles)
+            {
+                if (Path.GetExtension(item) != ".meta")
                 {
                     var filedata = magazineList.FirstOrDefault(x => x.url.EndsWith(item));
                     if (filedata != null)
                     {
                         File.Delete(item);
                     }
-                }*/ 
+                }
                 if(Path.GetExtension(item) == ".dlc")
                 {
                     Debug.Log("item:" + item);
-                    try
-                    {
-                        AssetBundle bundle = AssetBundle.LoadFromFile(item);
-                        assetBundles.Add(bundle);
-                        scensNames.AddRange(bundle.GetAllScenePaths());
-                    } catch (Exception e)
-                    {
-                        Debug.Log(e.StackTrace);
-                    }
-                    
+                    AssetBundle bundle = AssetBundle.LoadFromFile(item);
+                    assetBundles.Add(bundle);
+                    scensNames.AddRange(bundle.GetAllScenePaths());
 
-                    /*var bundleRequest = AssetBundle.LoadFromFileAsync(item);
+                    var bundleRequest = AssetBundle.LoadFromFileAsync(item);
                     yield return bundleRequest;
 
                     assetBundles.Add(bundleRequest.assetBundle);
 
-                    scensNames.AddRange(bundleRequest.assetBundle.GetAllScenePaths());*/
+                    scensNames.AddRange(bundleRequest.assetBundle.GetAllScenePaths());
                 }
                 yield return null;
             }
-        }
+        }*/
         RefreshSceneList();
     }
-    public void ShowDLC()
+    /* public void ShowDLC()
     {
         if(LoadMagazineListFromServer())
         {
@@ -153,17 +158,17 @@ public class LoadMagazine : MonoBehaviour
                 clone.SetActive(true);
             }
         }
-    }
+    } */
     public void RefreshSceneList()
     {
         foreach (Transform item in rootContainer)
         {
             Destroy(item.gameObject);
         }
-        Debug.Log("List of scenes:" + scensNames);
+
         foreach (var item in scensNames)
         {
-            Debug.Log("!!!!!!!!! scenes Added:" + item);
+            Debug.Log("########## Adding ScensNames:" + item);
             labelText.text = Path.GetFileNameWithoutExtension(item);
             var clone = Instantiate(prefeb.gameObject) as GameObject;
             clone.GetComponent<Button>().AddEventListener(labelText.text, LoadAssetBundelScens);
@@ -190,38 +195,19 @@ public class LoadMagazine : MonoBehaviour
 
     public void LoadMagazineList()
     {
-        MagazineList magazineListObj = GetMagaizneListFromPref();
-        if (magazineListObj != null)
-        {
-            magazineList = magazineListObj.data;
-        }
-        Thread thread = new Thread(() => WSCall.GetMagazineList()) { Name = "TGetMagazineList" };
+        DLCCache.LoadMagazineListFromPref();
+        Thread thread = new Thread(() => CheckForNewMagazineAvailability()) { Name = "TNewMagCheck" };
         thread.Start();
     }
 
-    public bool LoadMagazineListFromServer()
-    {
-        if (Application.internetReachability == NetworkReachability.NotReachable)
-        {
-            Debug.Log("Error. Check internet connection!");
-            return false;
-        } else
-        {
-            MagazineList magazineListObj = WSCall.GetMagazineList();
-            if (magazineListObj != null)
-                magazineList = magazineListObj.data;
-            return true;
+    public void CheckForNewMagazineAvailability() {
+        List<Magazine> oldMagazineList = DLCCache.magazinelist;
+        List<Magazine> magazinesServer = DLCCache.GetMagazineListFromServer(false);
+        if(magazinesServer != null) {
+            IEnumerable<Magazine> newMagazine = magazinesServer.Except(DLCCache.magazinelist);
+            if(newMagazine != null) {
+                //New Magazine Available
+            }
         }
-    }
-
-    public MagazineList GetMagaizneListFromPref()
-    {
-        string jsonResponse = PlayerPrefs.GetString("magazinelist");
-        if(jsonResponse == null)
-        {
-            WSCall.GetMagazineList();
-        }
-        jsonResponse = PlayerPrefs.GetString("magazinelist");
-        return JsonUtility.FromJson<MagazineList>(jsonResponse);
     }
 }

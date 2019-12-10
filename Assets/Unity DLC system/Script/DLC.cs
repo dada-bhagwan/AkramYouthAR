@@ -67,7 +67,7 @@ public class DLC : MonoBehaviour
                 }
             }
         }
-        LoadMagazine.main.ShowDLC();
+        DLCDownloadPage.main.ReloadDLCGameObject();
     }
     
     IEnumerator CoDownload()
@@ -158,7 +158,7 @@ public class DLC : MonoBehaviour
 #endif
         }
         deleteButton.gameObject.SetActive(true);
-        LoadMagazine.main.ShowDLC();
+        DLCDownloadPage.main.ReloadDLCGameObject();
     }
 
     // Start is called before the first frame update
@@ -253,7 +253,7 @@ public class DLC : MonoBehaviour
         try
         {
             System.Threading.Thread.Sleep(5000);
-            LoadMagazine.main.ShowDLC();
+            DLCDownloadPage.main.ReloadDLCGameObject();
         }
         catch (Exception ex)
         {

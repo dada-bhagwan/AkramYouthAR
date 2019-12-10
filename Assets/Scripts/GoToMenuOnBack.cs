@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GoToMenuOnBack : MonoBehaviour
 {
+    public string scenename = "Menu";
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class GoToMenuOnBack : MonoBehaviour
             // Check if Back was pressed this frame
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                SceneManager.LoadScene("Menu");
+                SceneManager.LoadScene(scenename);
             }
      
     }

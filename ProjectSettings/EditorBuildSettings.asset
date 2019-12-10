@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/About.unity
     guid: b1873929e559a0545afa662705a0591e
+  - enabled: 1
+    path: Assets/Scenes/MagDownloadList.unity
+    guid: 19ed525f787eceb4aa935d96b125d734
   m_configObjects: {}
