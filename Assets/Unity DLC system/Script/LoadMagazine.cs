@@ -6,6 +6,8 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading;
+using System;
+
 public class LoadMagazine : MonoBehaviour
 {
     [Header("UI DLC")]
@@ -110,9 +112,16 @@ public class LoadMagazine : MonoBehaviour
                 if(Path.GetExtension(item) == ".dlc")
                 {
                     Debug.Log("item:" + item);
-                    AssetBundle bundle = AssetBundle.LoadFromFile(item);
-                    assetBundles.Add(bundle);
-                    scensNames.AddRange(bundle.GetAllScenePaths());
+                    try
+                    {
+                        AssetBundle bundle = AssetBundle.LoadFromFile(item);
+                        assetBundles.Add(bundle);
+                        scensNames.AddRange(bundle.GetAllScenePaths());
+                    } catch (Exception e)
+                    {
+                        Debug.Log(e.StackTrace);
+                    }
+                    
 
                     /*var bundleRequest = AssetBundle.LoadFromFileAsync(item);
                     yield return bundleRequest;
@@ -151,9 +160,10 @@ public class LoadMagazine : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
-
+        Debug.Log("List of scenes:" + scensNames);
         foreach (var item in scensNames)
         {
+            Debug.Log("!!!!!!!!! scenes Added:" + item);
             labelText.text = Path.GetFileNameWithoutExtension(item);
             var clone = Instantiate(prefeb.gameObject) as GameObject;
             clone.GetComponent<Button>().AddEventListener(labelText.text, LoadAssetBundelScens);

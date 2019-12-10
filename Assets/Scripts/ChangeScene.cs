@@ -21,6 +21,10 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("November");
     }
 
+    public void GoToMagazineList()
+    {
+        SceneManager.LoadScene("MagazineList");
+    }
 
     public void GoToVideo()
     {

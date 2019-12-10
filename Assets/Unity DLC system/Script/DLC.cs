@@ -20,7 +20,7 @@ public class DLC : MonoBehaviour
     public Button deleteButton;
     public RadialFill radial;
     [Header("Appearance")]
-    public Color avilavleColor, downloadedColore;
+    public Color avilavleColor, downloadedColor;
 
     string bundalUrl, filePath;
 
@@ -32,7 +32,7 @@ public class DLC : MonoBehaviour
         bundalUrl = dlcUrl;
         filePath = LoadMagazine.dlcPath + magazine.fileName;
         bool downloaded = File.Exists(filePath);
-        background.color = downloaded ? downloadedColore : avilavleColor;
+        background.color = downloaded ? downloadedColor : avilavleColor;
         //progressbar.value = downloaded ? 1 : 0;
         radial.CurrentValue = downloaded ? 1 : 0;
         downloadbutton.gameObject.SetActive(!downloaded);
@@ -151,8 +151,10 @@ public class DLC : MonoBehaviour
                 Debug.LogError(www.error);
                 yield break;
             }
+            String tmpFilePath = filePath + ".tmp"; 
 #if !UNITY_WEBPLAYER
-            File.WriteAllBytes(filePath, www.bytes);
+            File.WriteAllBytes(tmpFilePath, www.bytes);
+            System.IO.File.Move(tmpFilePath, filePath);
 #endif
         }
         deleteButton.gameObject.SetActive(true);
