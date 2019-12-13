@@ -140,25 +140,7 @@ public class LoadMagazine : MonoBehaviour
         }*/
         RefreshSceneList();
     }
-    /* public void ShowDLC()
-    {
-        if(LoadMagazineListFromServer())
-        {
-            foreach (Transform t in rootDicContainer)
-            {
-                Destroy(t.gameObject);
-            }
-            for (int i = 0; i < magazineList.Length; i++)
-            {
-                var clone = Instantiate(dlcPrefeb.gameObject) as GameObject;
-
-                clone.transform.SetParent(rootDicContainer);
-
-                clone.GetComponent<DLC>().Inti(magazineList[i]);
-                clone.SetActive(true);
-            }
-        }
-    } */
+   
     public void RefreshSceneList()
     {
         foreach (Transform item in rootContainer)
@@ -168,14 +150,21 @@ public class LoadMagazine : MonoBehaviour
 
         foreach (var item in scensNames)
         {
-            Debug.Log("########## Adding ScensNames:" + item);
-            labelText.text = Path.GetFileNameWithoutExtension(item);
-            var clone = Instantiate(prefeb.gameObject) as GameObject;
-            clone.GetComponent<Button>().AddEventListener(labelText.text, LoadAssetBundelScens);
+            try
+            {
+                Debug.Log("########## Adding ScensNames:" + item);
+                labelText.text = Path.GetFileNameWithoutExtension(item);
+                var clone = Instantiate(prefeb.gameObject) as GameObject;
+                clone.GetComponent<Button>().AddEventListener(labelText.text, LoadAssetBundelScens);
 
-            clone.SetActive(true);
-            clone.transform.SetParent(rootContainer);
-            AddSpace();
+                clone.SetActive(true);
+                clone.transform.SetParent(rootContainer);
+                AddSpace();
+            }
+            catch(Exception e)
+            {
+                Debug.LogError("@@@@@@@@@ Error while loading schene" + item + "\t" + e.StackTrace);
+            }
             //Debug.Log(item);
             //Debug.Log(Path.GetFileNameWithoutExtension(item));
         }
