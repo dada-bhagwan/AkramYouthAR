@@ -19,4 +19,13 @@ public class AppUtiltiy : MonoBehaviour
     {
         Application.OpenURL("mailto:gncapps@googlegroups.com?subject=Feedback/Bug%20Report%20of%20Akram%20Youth%20AR");
     }
+
+    public static bool IsInternetConnected()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            return false;
+        }
+        return true;
+    }
 }

@@ -10,13 +10,16 @@ using System;
 
 public class LoadMagazine : MonoBehaviour
 {
-    
+
     [Header("UI SCENE LIST")]
     public Transform rootContainer;
     public Button prefeb;
     public Text labelText;
     public GameObject Space;
-
+    public GameObject downloadHint;
+    public GameObject InternetConnectPopup;
+    public Text newMagazineTxt;
+    public GameObject newMagazinePopup;
     public static LoadMagazine main
     {
         get;
@@ -59,7 +62,7 @@ public class LoadMagazine : MonoBehaviour
         string dlcFolder = dlcPath;
         int i = 0;
         List<Magazine> magazineList = DLCCache.magazinelist;
-        
+
         while (i < magazineList.Count)
         {
             try
@@ -78,7 +81,8 @@ public class LoadMagazine : MonoBehaviour
 
                     scensNames.AddRange(bundleRequest.assetBundle.GetAllScenePaths());*/
                 }
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Debug.LogError("Error while loading magazine" + magazineList[i] + e.StackTrace);
             }
@@ -103,7 +107,8 @@ public class LoadMagazine : MonoBehaviour
                     }
                 }
             }
-        } catch(Exception e)
+        }
+        catch (Exception e)
         {
             Debug.LogError("##### Error while deleting File" + e.StackTrace);
         }
@@ -140,14 +145,14 @@ public class LoadMagazine : MonoBehaviour
         }*/
         RefreshSceneList();
     }
-   
+
     public void RefreshSceneList()
     {
         foreach (Transform item in rootContainer)
         {
             Destroy(item.gameObject);
         }
-
+        SetDownloadHintStatus();
         foreach (var item in scensNames)
         {
             try
@@ -161,7 +166,7 @@ public class LoadMagazine : MonoBehaviour
                 clone.transform.SetParent(rootContainer);
                 AddSpace();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.LogError("@@@@@@@@@ Error while loading schene" + item + "\t" + e.StackTrace);
             }
@@ -169,6 +174,34 @@ public class LoadMagazine : MonoBehaviour
             //Debug.Log(Path.GetFileNameWithoutExtension(item));
         }
         Debug.Log("########## All Scene added");
+    }
+
+    void SetDownloadHintStatus()
+    {
+        if (downloadHint != null)
+        {
+            if (scensNames == null || scensNames.Count == 0)
+            {
+                downloadHint.SetActive(true);
+            }
+            else
+            {    
+                downloadHint.SetActive(false);
+            }
+        }
+    }
+
+    public void GoToMagazineDownloadList()
+    {
+        if(!AppUtiltiy.IsInternetConnected())
+        {
+            InternetConnectPopup.SetActive(true);
+        }
+        else
+        {
+            SceneManager.LoadScene("MagDownloadList");
+        }
+        
     }
     public void LoadAssetBundelScens(string scenName)
     {
@@ -185,18 +218,58 @@ public class LoadMagazine : MonoBehaviour
     public void LoadMagazineList()
     {
         DLCCache.LoadMagazineListFromPref();
+        //CheckForNewMagazineAvailability();
         Thread thread = new Thread(() => CheckForNewMagazineAvailability()) { Name = "TNewMagCheck" };
         thread.Start();
     }
 
-    public void CheckForNewMagazineAvailability() {
+    public void CheckForNewMagazineAvailability()
+    {
         List<Magazine> oldMagazineList = DLCCache.magazinelist;
         List<Magazine> magazinesServer = DLCCache.GetMagazineListFromServer(false);
-        if(magazinesServer != null) {
-            IEnumerable<Magazine> newMagazine = magazinesServer.Except(DLCCache.magazinelist);
-            if(newMagazine != null) {
-                //New Magazine Available
+        if (magazinesServer != null && DLCCache.magazinelist != null)
+        {
+
+            IEnumerable<Magazine> newMagazines = magazinesServer.Except(DLCCache.magazinelist, new MyClassEqualityComparer());
+            if(newMagazines.Any())
+            {
+                string newMagazineList = "";
+                Magazine first = newMagazines.First();
+                foreach (Magazine newMagazine in newMagazines)
+                {
+                    if(newMagazine == first)
+                    {
+                        newMagazineList = newMagazine.name;
+                    }
+                    else
+                    {
+                        newMagazineList = newMagazineList + " & " + newMagazine.name;
+                    }
+                }
+                newMagazineTxt.text = newMagazineList + " magazine AR are available to Download.";
+                newMagazinePopup.SetActive(true);
             }
         }
     }
+
+    class MyClassEqualityComparer : IEqualityComparer<Magazine>
+    {
+        public bool Equals(Magazine x, Magazine y)
+        {
+            return x.id == y.id;
+        }
+
+        public int GetHashCode(Magazine obj)
+        {
+            unchecked
+            {
+                if (obj == null)
+                    return 0;
+                int hashCode = obj.id.GetHashCode();
+                hashCode = (hashCode * 397) ^ obj.id.GetHashCode();
+                return hashCode;
+            }
+        }
+    }
+
 }

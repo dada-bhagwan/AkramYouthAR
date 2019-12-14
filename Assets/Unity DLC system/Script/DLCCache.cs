@@ -15,7 +15,7 @@ public class DLCCache
     {
         List<Magazine> tmp = GetMagazineListFromPref();
         if(tmp != null)
-            DLCCache.magazinelist = tmp;
+            magazinelist = tmp;
     }
 
     public static List<Magazine> GetMagazineListFromPref() {
@@ -36,7 +36,7 @@ public class DLCCache
     {
         List<Magazine> tmp = GetMagazineListFromServer(true);
         if(tmp != null)
-            DLCCache.magazinelist = tmp;
+            magazinelist = tmp;
         return true;
     }
 

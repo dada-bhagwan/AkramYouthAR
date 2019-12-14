@@ -18,18 +18,18 @@ public class DLC : MonoBehaviour
     public Slider progressbar;
     public Button downloadbutton;
     public Button deleteButton;
+    public Text size;
     public RadialFill radial;
     [Header("Appearance")]
     public Color avilavleColor, downloadedColor;
-
+    Magazine magazine;
     string bundalUrl, filePath;
 
     public void Inti(Magazine magazine)
     {
-        string dlcName = magazine.name;
-        string dlcUrl = magazine.url;
-        nameText.text = dlcName;
-        bundalUrl = dlcUrl;
+        this.magazine = magazine;
+        nameText.text = magazine.name;
+        bundalUrl = magazine.url;
         filePath = LoadMagazine.dlcPath + magazine.fileName;
         bool downloaded = File.Exists(filePath);
         background.color = downloaded ? downloadedColor : avilavleColor;
@@ -37,6 +37,8 @@ public class DLC : MonoBehaviour
         radial.CurrentValue = downloaded ? 1 : 0;
         downloadbutton.gameObject.SetActive(!downloaded);
         deleteButton.gameObject.SetActive(downloaded);
+        size.text = magazine.size + " MB";
+        //size.gameObject.SetActive(!downloaded);
     }
     public void Download()
     {
@@ -69,7 +71,7 @@ public class DLC : MonoBehaviour
         }
         DLCDownloadPage.main.ReloadDLCGameObject();
     }
-    
+
     IEnumerator CoDownload()
     {
         downloadbutton.gameObject.SetActive(false);
@@ -139,9 +141,11 @@ public class DLC : MonoBehaviour
         }*/
         using (WWW www = new WWW(bundalUrl))
         {
+            DLCDownloadPage.main.isDownloadRunning = true;
             while (!www.isDone && string.IsNullOrEmpty(www.error))
             {
                 //progressbar.value = www.progress;
+                DLCDownloadPage.main.isDownloadRunning = true;
                 radial.CurrentValue = www.progress;
                 yield return null;
             }
@@ -151,14 +155,17 @@ public class DLC : MonoBehaviour
                 Debug.LogError(www.error);
                 yield break;
             }
-            String tmpFilePath = filePath + ".tmp"; 
+            String tmpFilePath = filePath + ".tmp";
 #if !UNITY_WEBPLAYER
             File.WriteAllBytes(tmpFilePath, www.bytes);
             System.IO.File.Move(tmpFilePath, filePath);
+            radial.CurrentValue = 1;
+            WSCall.IncMagazineDownload(magazineId: magazine.id);
+            DLCDownloadPage.main.isDownloadRunning = false;
 #endif
         }
         deleteButton.gameObject.SetActive(true);
-        DLCDownloadPage.main.ReloadDLCGameObject();
+        //DLCDownloadPage.main.ReloadDLCGameObject();
     }
 
     // Start is called before the first frame update
@@ -172,8 +179,8 @@ public class DLC : MonoBehaviour
     {
 
     }
-	
-	void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+
+    void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
     {
         try
         {
