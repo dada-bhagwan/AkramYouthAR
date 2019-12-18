@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="12_cyber" size="5.000000 6.856866" />
+    <ImageTarget name="06_Dadavani" size="5.000000 6.856866" />
+    <ImageTarget name="03_Sampadikiya" size="5.000000 6.856866" />
+    <ImageTarget name="01_FrontPage" size="5.000000 6.856866" />
+  </Tracking>
+</QCARConfig>
