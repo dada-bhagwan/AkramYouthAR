@@ -15,6 +15,7 @@ public class DLC : MonoBehaviour
     public Image image;
     public Image background;
     public Text nameText;
+    public Text subTitleText;
     public Slider progressbar;
     public Button downloadbutton;
     public Button deleteButton;
@@ -28,8 +29,9 @@ public class DLC : MonoBehaviour
     public void Inti(Magazine magazine)
     {
         this.magazine = magazine;
-        nameText.text = magazine.name;
+        nameText.text = magazine.title;
         bundalUrl = magazine.url;
+        subTitleText.text = magazine.name;
         filePath = LoadMagazine.dlcPath + magazine.fileName;
         bool downloaded = File.Exists(filePath);
         background.color = downloaded ? downloadedColor : avilavleColor;

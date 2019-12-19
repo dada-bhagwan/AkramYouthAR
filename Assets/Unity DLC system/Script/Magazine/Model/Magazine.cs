@@ -26,6 +26,7 @@ public class Magazine: IEquatable<Magazine>, IComparable<Magazine>
     public string id;
     public double size;
     public string url;
+    public string title;
     public string fileName {
 
         get {
