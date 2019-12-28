@@ -316,6 +316,24 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 48849912}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &117078365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4094967961732404581, guid: 72b8dfac5adbb3f4bb403942e604a849,
+    type: 3}
+  m_PrefabInstance: {fileID: 1729527524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &117078370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117078365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52fe2efcf5b77c7429afdd673dc0a10b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &171944874 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8086852424768337845, guid: 76a138fe0193d9041b47f480e9050b7d,
@@ -1791,6 +1809,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094967961732404583, guid: 72b8dfac5adbb3f4bb403942e604a849,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 117078370}
+    - target: {fileID: 4094967961732404583, guid: 72b8dfac5adbb3f4bb403942e604a849,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenAkramYouthARApp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72b8dfac5adbb3f4bb403942e604a849, type: 3}
