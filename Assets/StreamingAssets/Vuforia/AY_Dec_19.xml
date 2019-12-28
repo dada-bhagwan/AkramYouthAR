@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="06_Dadavani_Full" size="5.000000 6.856866" />
+    <ImageTarget name="6_Dadavani" size="5.000000 6.738911" />
+    <ImageTarget name="20_Experience_Dipen" size="5.000000 6.856866" />
+    <ImageTarget name="03_Sampadikiya" size="5.000000 6.856866" />
+    <ImageTarget name="23_Kavita" size="5.000000 6.856866" />
+    <ImageTarget name="21_Animation" size="5.000000 6.856866" />
+    <ImageTarget name="19_Podcast" size="5.000000 6.856866" />
+    <ImageTarget name="18_Aptputra" size="5.000000 6.856866" />
+    <ImageTarget name="17_Niruma" size="5.000000 6.856866" />
+    <ImageTarget name="16_Dada" size="5.000000 6.856866" />
+    <ImageTarget name="14_Pujyashree" size="5.000000 6.856866" />
+    <ImageTarget name="06_Dadavani" size="5.000000 6.856866" />
+    <ImageTarget name="12_Cyber" size="5.000000 6.856866" />
+    <ImageTarget name="11_Mother_Father2" size="5.000000 6.856866" />
+    <ImageTarget name="10_Mother_Father" size="5.000000 6.856866" />
+    <ImageTarget name="08_Experience" size="5.000000 6.856866" />
+    <ImageTarget name="07_Dadavani" size="5.000000 6.856866" />
+    <ImageTarget name="05_YouthApp" size="5.000000 6.856866" />
+    <ImageTarget name="01_FrontPage" size="5.000000 6.856866" />
+  </Tracking>
+</QCARConfig>

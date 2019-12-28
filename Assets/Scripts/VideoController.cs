@@ -13,7 +13,7 @@ public class VideoController : MonoBehaviour
 {
     #region PRIVATE_MEMBERS
 
-    private VideoPlayer videoPlayer;
+    public VideoPlayer videoPlayer;
 
     #endregion //PRIVATE_MEMBERS
 

@@ -18,7 +18,7 @@ public class VideoTrackableEventHandler : DefaultTrackableEventHandler
     public static bool isTrakingFound = false;
     GameObject HelpPanel;
     string[] RotateTargetName = new string[4] { "01_Front_Page", "05_Chicken", "07_Glasses", "04_Gnani_With_Youth" };
-
+    public bool isMultipleVideoWithAudio = false;
     public GameObject[] resetObj;
     Vector3[] startScale;
     Vector3[] startPos;
@@ -77,9 +77,11 @@ public class VideoTrackableEventHandler : DefaultTrackableEventHandler
         //HelpPanel.SetActive(true);
         base.OnTrackingLost();
     }
-    
- 	protected override void OnTrackingFound()
+    int playVideoIndex = 0;
+    VideoController[] videoControllers;
+     protected override void OnTrackingFound()
     {
+        Debug.Log("!!!!!!!!!!!!!!! OnTrackingFound:" + mTrackableBehaviour.name);
         HelpPanel = GameObject.Find("HelpText");
         if (HelpPanel != null)
         {
@@ -104,9 +106,23 @@ public class VideoTrackableEventHandler : DefaultTrackableEventHandler
             var objAudioCon = mTrackableBehaviour.GetComponentsInChildren<AudioSource>();
             Animation[] animationComponents = GetComponentsInChildren<Animation>();
             Animator[] animatorComponents = GetComponentsInChildren<Animator>();
-            for (int i=0;i<objVideoCont.Length;i++) {
-                mTrackableBehaviour.GetComponentsInChildren<VideoController>()[i].Play();
+            videoControllers = (VideoController[]) mTrackableBehaviour.GetComponentsInChildren<VideoController>().Clone();
+            if(isMultipleVideoWithAudio)
+            {
+                for (int j = 0; j < videoControllers.Length; j++)
+                {
+                    videoControllers[j].videoPlayer.loopPointReached += HandleOnVideoFinished;
+                }
+                HandleOnVideoFinished(null);
             }
+            else
+            {
+                for(int j = 0; j < videoControllers.Length; j++)
+                {
+                    videoControllers[j].Play();
+                }
+            }
+ 
             for (int i = 0; i < objAudioCon.Length; i++) {
                 mTrackableBehaviour.GetComponentsInChildren<AudioSource>()[i].Play();
             }
@@ -133,6 +149,20 @@ public class VideoTrackableEventHandler : DefaultTrackableEventHandler
                 isSecondTargetOfAction = false;
             }
         }
+    }
+
+    void HandleOnVideoFinished(UnityEngine.Video.VideoPlayer video)
+    {
+        if (playVideoIndex >= videoControllers.Length)
+            playVideoIndex = 0;
+        int curPlayingVidIndex = playVideoIndex - 1;
+        if (curPlayingVidIndex == -1)
+            curPlayingVidIndex = videoControllers.Length - 1;
+        videoControllers[curPlayingVidIndex].gameObject.SetActive(false);
+        videoControllers[curPlayingVidIndex].Pause();
+        videoControllers[playVideoIndex].gameObject.SetActive(true);
+        videoControllers[playVideoIndex].Play();
+        playVideoIndex++;
     }
 
     /*public void reset()
