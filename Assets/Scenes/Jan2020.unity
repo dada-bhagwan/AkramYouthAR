@@ -140,7 +140,7 @@ PrefabInstance:
     - target: {fileID: 5352248693512402893, guid: 3e44fe69755dc414595a4a12cb387148,
         type: 3}
       propertyPath: m_Name
-      value: 03_Sampadkiya
+      value: DharmVideo
       objectReference: {fileID: 0}
     - target: {fileID: 5352248693512402934, guid: 3e44fe69755dc414595a4a12cb387148,
         type: 3}
@@ -1005,7 +1005,7 @@ PrefabInstance:
     - target: {fileID: 358122645241989386, guid: 456fde697676049b9b559f9a4fe8da50,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.00136
       objectReference: {fileID: 0}
     - target: {fileID: 358122645241989386, guid: 456fde697676049b9b559f9a4fe8da50,
         type: 3}
@@ -1015,7 +1015,7 @@ PrefabInstance:
     - target: {fileID: 358122645241989386, guid: 456fde697676049b9b559f9a4fe8da50,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.229
+      value: 0.22289
       objectReference: {fileID: 0}
     - target: {fileID: 358122645241989386, guid: 456fde697676049b9b559f9a4fe8da50,
         type: 3}
@@ -1060,7 +1060,12 @@ PrefabInstance:
     - target: {fileID: 358122645241989386, guid: 456fde697676049b9b559f9a4fe8da50,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.052485805
+      value: 0.053375304
+      objectReference: {fileID: 0}
+    - target: {fileID: 358122645241989386, guid: 456fde697676049b9b559f9a4fe8da50,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.07241285
       objectReference: {fileID: 0}
     - target: {fileID: 358122645241989387, guid: 456fde697676049b9b559f9a4fe8da50,
         type: 3}
