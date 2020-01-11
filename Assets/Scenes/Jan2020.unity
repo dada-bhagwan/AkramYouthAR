@@ -1789,7 +1789,7 @@ PrefabInstance:
     - target: {fileID: 5352248693512402893, guid: 3e44fe69755dc414595a4a12cb387148,
         type: 3}
       propertyPath: m_Name
-      value: 04_Gnani_With_Youth
+      value: QuizPage
       objectReference: {fileID: 0}
     - target: {fileID: 5352248693512402932, guid: 3e44fe69755dc414595a4a12cb387148,
         type: 3}
