@@ -1,7 +1,10 @@
 ManifestFileVersion: 0
-CRC: 3207533658
+CRC: 145007059
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: october19.dlc
+      Dependencies: {}
+    Info_1:
+      Name: jan-2020.dlc
       Dependencies: {}

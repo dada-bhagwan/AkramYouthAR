@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="sadhu_video" size="1.000000 0.686217" />
+    <ImageTarget name="LASTPAGE" size="1.000000 1.371373" />
     <ImageTarget name="Viewo1" size="1.000000 1.371553" />
     <ImageTarget name="Videro4" size="1.000000 1.371553" />
     <ImageTarget name="VideoDharam" size="1.000000 1.371553" />
