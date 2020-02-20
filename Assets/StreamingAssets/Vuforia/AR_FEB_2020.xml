@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="P-24" size="10.000000 13.713733" />
+    <ImageTarget name="P-23" size="10.000000 13.713733" />
+    <ImageTarget name="P-22" size="10.000000 13.713733" />
+    <ImageTarget name="P-21" size="10.000000 13.713733" />
+    <ImageTarget name="P-20" size="10.000000 13.713733" />
+    <ImageTarget name="P-19" size="10.000000 13.713733" />
+    <ImageTarget name="P-18" size="10.000000 13.713733" />
+    <ImageTarget name="P-17" size="10.000000 13.713733" />
+    <ImageTarget name="P-16" size="10.000000 13.713733" />
+    <ImageTarget name="P-15" size="10.000000 13.713733" />
+    <ImageTarget name="P-14" size="10.000000 13.713733" />
+    <ImageTarget name="P-13" size="10.000000 13.713733" />
+    <ImageTarget name="P-12" size="10.000000 13.713733" />
+    <ImageTarget name="P-11" size="10.000000 13.713733" />
+    <ImageTarget name="P-10" size="10.000000 13.713733" />
+    <ImageTarget name="P-9" size="10.000000 13.713733" />
+    <ImageTarget name="P-8" size="10.000000 13.713733" />
+    <ImageTarget name="P-7" size="10.000000 13.713733" />
+    <ImageTarget name="P-6" size="10.000000 13.713733" />
+    <ImageTarget name="P-5" size="10.000000 13.713733" />
+    <ImageTarget name="P-4" size="10.000000 13.713733" />
+    <ImageTarget name="P-3" size="10.000000 13.713733" />
+    <ImageTarget name="P-2" size="10.000000 13.713733" />
+    <ImageTarget name="P-1" size="10.000000 13.713733" />
+  </Tracking>
+</QCARConfig>
