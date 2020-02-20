@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="karaoke" size="1.000000 1.371373" />
     <ImageTarget name="kavita" size="1.000000 1.371373" />
     <ImageTarget name="pen" size="1.000000 1.371373" />
     <ImageTarget name="temple2" size="1.000000 1.371373" />
