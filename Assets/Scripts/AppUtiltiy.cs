@@ -5,6 +5,30 @@ using UnityEngine;
 public class AppUtiltiy : MonoBehaviour
 {
     // Start is called before the first frame update
+
+
+  public void OpenARapp()
+    {
+        Application.OpenURL("http://tiny.cc/akramyouthar");
+    }
+
+
+    public void OpenAkramYouth()
+    {
+        Application.OpenURL("https://play.google.com/store/apps/details?id=org.dadabhagwan.youth");
+    }
+
+
+    public void OpenQuiz()
+    {
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSc1hr_zad72XA0sThfzUQDIXQeYqVGWb_9yaHvHaAOE41yi_g/viewform?ts=5e272841");
+    }
+    public void OpenFacebookPage()
+    {
+        Application.OpenURL("https://www.facebook.com/akramyouth.mag/");
+    }
+
+
     public void OpenPodcast()
     {
         Application.OpenURL("http://tiny.cc/AY-podcast");
